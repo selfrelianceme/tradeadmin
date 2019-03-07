@@ -106,7 +106,7 @@
                                     <div class="col-10">
                                         <select class="custom-select col-12" id="inlineFormCustomSelect" name="min_percent" id="min_percent">
                                             <option selected="" value="0">Выбрать...</option>
-                                            @for($i=0.25;$i<2;$i+=0.01)
+                                            @for($i=0.15;$i<5;$i+=0.01)
                                                 <option {{($i==old('min_percent'))?'selected':NULL}}  value="{{$i}}">{{$i}}%</option>
                                             @endfor
                                         </select>
@@ -121,7 +121,7 @@
                                     <div class="col-10">
                                         <select class="custom-select col-12" id="inlineFormCustomSelect" name="max_percent" id="max_percent">
                                             <option selected="" value="0">Выбрать...</option>
-                                            @for($i=0.25;$i<2;$i+=0.01)
+                                            @for($i=0.15;$i<5;$i+=0.01)
                                                 <option {{($i==old('max_percent'))?'selected':NULL}}  value="{{$i}}">{{$i}}%</option>
                                             @endfor
                                         </select>
