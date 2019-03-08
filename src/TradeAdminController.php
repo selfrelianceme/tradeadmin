@@ -4,7 +4,7 @@ namespace Selfreliance\TradeAdmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Libraries\Trade\TradeManager;
-
+use Artisan;
 class TradeAdminController extends Controller{
 
 	public function index(TradeManager $trade){
@@ -56,6 +56,9 @@ class TradeAdminController extends Controller{
             'QUEUE_SECONDS_DELAY='.env('QUEUE_SECONDS_DELAY'),
             'QUEUE_SECONDS_DELAY='.$request->input('QUEUE_SECONDS_DELAY'), file_get_contents($path)
         ));
+
+        Artisan::call('queue:restart');
+
         flash()->success('Новые условия сохранены');
         return redirect()->back();
 	}
