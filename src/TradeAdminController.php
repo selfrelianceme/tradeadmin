@@ -19,7 +19,7 @@ class TradeAdminController extends Controller{
 		$this->validate($request, [
 			'avalible_at'         => 'required',
 			'min_percent'        => ['required', function ($attribute, $value, $fail) {
-				if ($value < 0.25) {
+				if ($value < 0.15) {
 					$fail($attribute.' is invalid.');
 				}
 			}], 
