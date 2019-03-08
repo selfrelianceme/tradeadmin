@@ -38,6 +38,43 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-block">
+                    <h4 class="card-title">Условия движения очереди</h4>
+                    <form class="form" method="POST" action="{{route('AdminTradeAdminQueue')}}">
+                                
+                        <div class="form-group row {{ $errors->has('QUEUE_CNT_APP_ONE') ? ' error' : '' }}">
+                            <label for="QUEUE_CNT_APP_ONE" class="col-2 col-form-label">Количество заявок</label>
+                            <div class="col-10">
+                                <input type="text" name="QUEUE_CNT_APP_ONE" value="{{env('QUEUE_CNT_APP_ONE')}}" class="form-control" id="QUEUE_CNT_APP_ONE"/>      
+                                @if ($errors->has('QUEUE_CNT_APP_ONE'))
+                                    <div class="help-block"><ul role="alert"><li>{{ $errors->first('QUEUE_CNT_APP_ONE') }}</li></ul></div>
+                                @endif                         
+                            </div>
+                            
+                        </div>
+                        <div class="form-group row {{ $errors->has('QUEUE_SECONDS_DELAY') ? ' error' : '' }}">
+                            <label for="QUEUE_SECONDS_DELAY" class="col-2 col-form-label">Каждые N секунд</label>
+                            <div class="col-10">
+                                <input type="text" name="QUEUE_SECONDS_DELAY" value="{{env('QUEUE_SECONDS_DELAY')}}" class="form-control" id="QUEUE_SECONDS_DELAY"/>                           
+                                @if ($errors->has('QUEUE_SECONDS_DELAY'))
+                                    <div class="help-block"><ul role="alert"><li>{{ $errors->first('QUEUE_SECONDS_DELAY') }}</li></ul></div>
+                                @endif   
+                            </div>
+                            
+                        </div>
+
+                        <div class="form-group m-b-0">
+                            <div class="offset-sm-2 col-sm-9">
+                                <button type="submit" class="btn btn-info waves-effect waves-light m-t-10">Сохранить процент</button>
+                            </div>
+                        </div>
+                        {{ csrf_field() }}
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-block">
                     <h4 class="card-title">Движение очереди (условие за 1 минуту: {{$calc_queue['cnt_app_one']}} заявка каждые {{$calc_queue['seconds_delay']}} секунд, всего: {{($calc_queue['cnt_app_minute']*$calc_queue['cnt_app_one'])}} заявок)</h4>
                     
                     <div class="row">

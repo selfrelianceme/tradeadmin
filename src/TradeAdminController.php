@@ -41,4 +41,38 @@ class TradeAdminController extends Controller{
 		return redirect()->back();
 	}
 
+	public function queue(Request $request){
+		$this->validate($request, [
+			'QUEUE_CNT_APP_ONE'		=> 'required|numeric|min:1|max:40',
+			'QUEUE_SECONDS_DELAY'   => 'required|numeric|min:3',
+		]);
+		$path = $this->envPath();
+        file_put_contents($path, str_replace(
+            'QUEUE_CNT_APP_ONE='.env('QUEUE_CNT_APP_ONE'),
+            'QUEUE_CNT_APP_ONE='.$request->input('QUEUE_CNT_APP_ONE'), file_get_contents($path)
+        ));
+
+        file_put_contents($path, str_replace(
+            'QUEUE_SECONDS_DELAY='.env('QUEUE_SECONDS_DELAY'),
+            'QUEUE_SECONDS_DELAY='.$request->input('QUEUE_SECONDS_DELAY'), file_get_contents($path)
+        ));
+        flash()->success('Новые условия сохранены');
+        return redirect()->back();
+	}
+
+
+
+    /**
+     * Get the .env file path.
+     *
+     * @return string
+     */
+    protected function envPath()
+    {
+        if (method_exists(app(), 'environmentFilePath')) {
+            return app()->environmentFilePath();
+        }
+        return app()->basePath('.env');
+    }
+
 }
